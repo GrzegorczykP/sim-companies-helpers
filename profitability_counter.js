@@ -59,6 +59,15 @@ $(function () {
         let hourlyResourcesCost = resourceCost * producedAnHour;
         let hourlyFees = factoryData['wages'] * (1 + admCost);
         let hourlyIncome = productValue * producedAnHour;
+
+        let row = rows[2];
+        if (!row.innerText.includes('KALKULATOR PRODUKCJI'))
+            row = rows[3]
+        $(row).find('div.col-xs-6:contains("Jednostki na godzinę")')[0].innerHTML +=
+            `Dochody: $${(hourlyIncome - hourlyFees - hourlyResourcesCost).toFixed(2)} <br>
+            Koszt zakupu surowców: $${hourlyResourcesCost.toFixed(2)} <br>
+            Koszty pracownicze: $${hourlyFees.toFixed(2)} <br>
+            Przychody: $${hourlyIncome.toFixed(2)} <br>`;
     });
 
     observer.observe(target.get(1), {
